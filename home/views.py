@@ -1,15 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .forms import blogForm
 
 # Create your views here.
 def blogs(request):
     return render(request,'blogs.html')
 
-def addblogs(request):
+def addblog(request):
     if request.method == 'POST':
-        pass
-    else:
         form = blogForm(request.POST)
         if form.valid():
-            form.save()
-        return render(request,'blog.html')
+            try:
+                form.save()
+                return redirect('/')
+            except:
+                return redirect('addblog/')
+    else:
+        form = blogForm()
+        return render(request,'addblog.html',{'form':form})
