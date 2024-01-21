@@ -7,6 +7,10 @@
 </head>
 <body>
     <h1>blogs</h1>
-    <a href="{% url 'addblog' %}">add blog</a>
+    <a href="{% url 'addblog' %}">add blog</a> 
+    {% for blog in blogs %}
+    <h3> <a href="{% url 'editblog' blog.id %}">{{blog.title}}</a></h3>
+    <a href="{% url 'editblog' blog.id %}"><input type="button" value="edit"></a>  
+    {% endfor %}
 </body>
 </html>
